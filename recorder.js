@@ -44,8 +44,11 @@ function handleSuccess(stream){
 
 // Make the live strem stop
 stop.addEventListener('click',()=>{
-   live.srcObject=null;
-   
+
+   live.srcObject= null;
+   play.disabled = true;
+   download.disabled = true;
+   record.disabled= true;
    
   
 })
@@ -62,6 +65,7 @@ stop.addEventListener('click',()=>{
       record.textContent = 'Record';
       play.disabled = false;
       download.disabled = false;
+    
     }
   });
 
