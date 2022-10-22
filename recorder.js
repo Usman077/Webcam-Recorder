@@ -1,16 +1,16 @@
 // refrancing 
 const live = document.getElementById('live');
 const recorded = document.getElementById('Recorded');
-const start = document.getElementById('Start');
+const startCam = document.getElementById('Start');
 const play = document.getElementById('Play');
 const record = document.getElementById('Record');
 const download = document.getElementById('Download');
-const stop = document.getElementById('Stop');
+const Close = document.getElementById('Stop');
 
 
 
 // constraints  and start action
-start.addEventListener('click',async()=>{
+startCam.addEventListener('click',async()=>{
     const constraints = {
     audio:true,
      video:{  facingMode: "user", 
@@ -21,8 +21,9 @@ start.addEventListener('click',async()=>{
 }
 console.log('Using media constraints:', constraints);
 await init(constraints);
-stop.disabled= false;
+Close.disabled= false;
 record.disabled= false;
+
 })
 
 //  accessing user media
@@ -43,9 +44,9 @@ function handleSuccess(stream){
  }
 
 // Make the live strem stop
-stop.addEventListener('click',()=>{
-
-   live.srcObject= null;
+ Close.addEventListener('click',()=>{
+  
+   handleSuccess(null);
    play.disabled = true;
    download.disabled = true;
    record.disabled= true;
@@ -103,8 +104,11 @@ let recordedBlobs;
       recordedBlobs.push(event.data);
     }
   }
+  
   function stopRecording() {
     mediaRecorder.stop();
+    play.style.visibility = "visible";
+    download.style.visibility = "visible";
   }
 
 
