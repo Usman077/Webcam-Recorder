@@ -51,8 +51,9 @@ function handleSuccess(stream){
    handleSuccess(null);
 
    record.disabled= true;
-   stream.disabled = true;
-    init(null);
+   Record.textContent = 'Record';
+   
+    
    
   
 })
