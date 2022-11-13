@@ -6,6 +6,7 @@ const play = document.getElementById('Play');
 const record = document.getElementById('Record');
 const download = document.getElementById('Download');
 const Close = document.getElementById('Stop');
+const clear = document.getElementById('Clear');
 
 
 
@@ -41,15 +42,17 @@ function handleSuccess(stream){
      window.stream = stream;
     live.srcObject=stream;
 
+
  }
 
 // Make the live strem stop
  Close.addEventListener('click',()=>{
   
    handleSuccess(null);
-   play.disabled = true;
-   download.disabled = true;
+
    record.disabled= true;
+   stream.disabled = true;
+    init(null);
    
   
 })
@@ -66,7 +69,8 @@ function handleSuccess(stream){
       record.textContent = 'Record';
       play.disabled = false;
       download.disabled = false;
-    
+      clear.disabled = false;
+      recorded.style.visibility = 'visible';
     }
   });
 
@@ -109,6 +113,11 @@ let recordedBlobs;
     mediaRecorder.stop();
     play.style.visibility = "visible";
     download.style.visibility = "visible";
+    clear.style.visibility = "visible";
+    play.disabled = true;
+    download.disabled = true;
+
+    
   }
 
 
@@ -123,6 +132,20 @@ let recordedBlobs;
     recorded.play();
   });
 
+  clear.addEventListener('click', () => {
+    recorded.src = null;
+    recorded.srcObject = null;
+    recorded.style.visibility = 'hidden';
+
+
+    play.style.visibility = "hidden";
+    download.style.visibility = "hidden";
+    clear.style.visibility = "hidden";
+
+    download.disabled = true;
+  
+    
+  })
 
 
 
